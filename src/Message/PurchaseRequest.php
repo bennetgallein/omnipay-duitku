@@ -15,10 +15,10 @@ class PurchaseRequest extends AbstractRequest
 
         $data = [
             'merchantCode' => $this->getMerchantCode(),
-            'paymentAmount' => $this->getParameter('amount'),
-            'merchantOrderId' => $this->getParameter('transactionId'),
-            'productDetails' => $this->description('description'),
-            'email' => $this->getParameter('email'),
+            'paymentAmount' => $this->getAmount(),
+            'merchantOrderId' => $this->getTransactionId(),
+            'productDetails' => $this->getDescription(),
+            'email' => $this->getEmail(),
             'returnUrl' => $this->getReturnUrl(),
             'callbackUrl' => $this->getNotifyUrl(),
         ];
