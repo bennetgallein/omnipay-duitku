@@ -30,5 +30,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest {
   public function getTimestamp() {
     $dateTime = new \DateTime('now', new \DateTimeZone('Asia/Jakarta'));
     $timestamp = $dateTime->getTimestamp();
+    return $timestamp;
   }
 }
