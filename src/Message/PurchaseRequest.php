@@ -23,7 +23,7 @@ class PurchaseRequest extends AbstractRequest
             'callbackUrl' => $this->getNotifyUrl(),
         ];
 
-        $data['timestamp'] = time();
+        $data['timestamp'] = $this->getTimestamp();
         $data['signature'] = hash('sha256', $this->getMerchantCode() . $data['timestamp'] . $this->getApiKey());
 
         return $data;
