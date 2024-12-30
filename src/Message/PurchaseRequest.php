@@ -23,7 +23,7 @@ class PurchaseRequest extends AbstractRequest
         ];
 
         $data['timestamp'] = time();
-        $data['signature'] = hash('sha256', $this->getMerchantCode() . $data['timestamp'] . $this->getApiKey());
+        $data['signature'] = hash('sha256', $this->getParameter('merchantCode') . $data['timestamp'] . $this->getParameter('apiKey'));
 
         return $data;
     }
