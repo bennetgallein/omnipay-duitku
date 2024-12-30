@@ -13,11 +13,11 @@ class PurchaseRequest extends AbstractRequest
         $this->validate('amount', 'returnUrl');
 
         $data = [
-            'merchantCode' => $this->getMerchantCode(),
-            'paymentAmount' => $this->getAmount(),
+            'merchantCode' => $this->getParameter('merchantCode'),
+            'paymentAmount' => $this->getParameter('amount'),
             'merchantOrderId' => $this->getTransactionId(),
             'productDetails' => $this->getDescription(),
-            'email' => $this->getCard()->getEmail(),
+            'email' => $this->getParameter('email'),
             'returnUrl' => $this->getReturnUrl(),
             'callbackUrl' => $this->getNotifyUrl(),
         ];
