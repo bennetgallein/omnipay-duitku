@@ -31,13 +31,14 @@ class PurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->request('POST', $this->endpoint, [
+        $httpResponse = $this->httpClient->post($this->endpoint, [
             'headers' => [
                 'x-duitku-signature' => $data['signature'],
                 'x-duitku-timestamp' => $data['timestamp'],
                 'x-duitku-merchantcode' => $this->getMerchantCode()
-            ]
-        ], json_encode($data));
+            ],
+            'json' => $data
+        ]);
         bdump($httpResponse);
 
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
