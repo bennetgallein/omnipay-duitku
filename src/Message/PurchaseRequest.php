@@ -2,8 +2,8 @@
 
 namespace Omnipay\Duitku\Message;
 
-use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\Duitku\Message\PurchaseResponse;
+use Omnipay\Duitku\Message\AbstractRequest;
 
 class PurchaseRequest extends AbstractRequest
 {
@@ -14,17 +14,17 @@ class PurchaseRequest extends AbstractRequest
         $this->validate('amount', 'returnUrl');
 
         $data = [
-            'merchantCode' => $this->getParameter('merchantCode'),
+            'merchantCode' => $this->getMerchantCode(),
             'paymentAmount' => $this->getParameter('amount'),
-            'merchantOrderId' => $this->getTransactionId(),
-            'productDetails' => $this->getDescription(),
+            'merchantOrderId' => $this->getParameter('orderId'),
+            'productDetails' => $this->getParameter('description'),
             'email' => $this->getParameter('email'),
             'returnUrl' => $this->getReturnUrl(),
             'callbackUrl' => $this->getNotifyUrl(),
         ];
 
         $data['timestamp'] = time();
-        $data['signature'] = hash('sha256', $this->getParameter('merchantCode') . $data['timestamp'] . $this->getParameter('apiKey'));
+        $data['signature'] = hash('sha256', $this->getMerchantCode() . $data['timestamp'] . $this->getApiKey());
 
         return $data;
     }
@@ -35,14 +35,14 @@ class PurchaseRequest extends AbstractRequest
             'headers' => [
                 'x-duitku-signature' => $data['signature'],
                 'x-duitku-timestamp' => $data['timestamp'],
-                'x-duitku-merchantcode' => $this->getParameter('merchantCode')
+                'x-duitku-merchantcode' => $this->getMerchantCode()
             ]
         ], json_encode($data));
         bdump($this);
         bdump([
             'x-duitku-signature' => $data['signature'],
             'x-duitku-timestamp' => $data['timestamp'],
-            'x-duitku-merchantcode' => $this->getParameter('merchantCode')
+            'x-duitku-merchantcode' => $this->getMerchantCode()
         ]);
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
