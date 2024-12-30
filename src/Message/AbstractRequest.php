@@ -18,4 +18,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest {
   public function setMerchantCode($v) {
     return $this->setParameter('merchantCode', $v);
   }
+
+  public function setEmail($v) {
+    return $this->setParameter('email', $v);
+  }
+
+  public function getEmail() {
+    return $this->getParameter('email');
+  }
 }

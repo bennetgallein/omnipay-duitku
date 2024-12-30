@@ -16,8 +16,8 @@ class PurchaseRequest extends AbstractRequest
         $data = [
             'merchantCode' => $this->getMerchantCode(),
             'paymentAmount' => $this->getParameter('amount'),
-            'merchantOrderId' => $this->getParameter('orderId'),
-            'productDetails' => $this->getParameter('description'),
+            'merchantOrderId' => $this->getParameter('transactionId'),
+            'productDetails' => $this->description('description'),
             'email' => $this->getParameter('email'),
             'returnUrl' => $this->getReturnUrl(),
             'callbackUrl' => $this->getNotifyUrl(),
@@ -38,12 +38,8 @@ class PurchaseRequest extends AbstractRequest
                 'x-duitku-merchantcode' => $this->getMerchantCode()
             ]
         ], json_encode($data));
-        bdump($this);
-        bdump([
-            'x-duitku-signature' => $data['signature'],
-            'x-duitku-timestamp' => $data['timestamp'],
-            'x-duitku-merchantcode' => $this->getMerchantCode()
-        ]);
+        bdump($httpResponse);
+
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
         return $this->response = new PurchaseResponse($this, $responseData);
