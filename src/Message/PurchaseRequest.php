@@ -3,6 +3,7 @@
 namespace Omnipay\Duitku\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\Duitku\Message\PurchaseResponse;
 
 class PurchaseRequest extends AbstractRequest
 {
@@ -42,5 +43,4 @@ class PurchaseRequest extends AbstractRequest
         return $this->response = new PurchaseResponse($this, $responseData);
     }
 
-    // Add getter and setter methods for merchantCode and apiKey
 }
