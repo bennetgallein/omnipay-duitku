@@ -4,7 +4,7 @@ namespace Omnipay\Duitku;
 
 use Omnipay\Common\AbstractGateway;
 
-class DuitkuGateway extends AbstractGateway
+class Gateway extends AbstractGateway
 {
     public function getName()
     {
