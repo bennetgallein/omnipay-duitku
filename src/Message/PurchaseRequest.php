@@ -39,6 +39,11 @@ class PurchaseRequest extends AbstractRequest
             ]
         ], json_encode($data));
         bdump($httpResponse);
+        bdump([
+            'x-duitku-signature' => $data['signature'],
+            'x-duitku-timestamp' => $data['timestamp'],
+            'x-duitku-merchantcode' => $this->getParameter('merchantCode')
+        ]);
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
         return $this->response = new PurchaseResponse($this, $responseData);
