@@ -38,7 +38,7 @@ class PurchaseRequest extends AbstractRequest
                 'x-duitku-merchantcode' => $this->getParameter('merchantCode')
             ]
         ], json_encode($data));
-        bdump($httpResponse);
+        bdump($this);
         bdump([
             'x-duitku-signature' => $data['signature'],
             'x-duitku-timestamp' => $data['timestamp'],
