@@ -38,8 +38,6 @@ class PurchaseRequest extends AbstractRequest
                 'Accept' => "application/json"
             ], json_encode($data)
         );
-        bdump($httpResponse);
-        bdump( $httpResponse->getBody()->getContents());
 
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
