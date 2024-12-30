@@ -7,7 +7,7 @@ use Omnipay\Duitku\Message\PurchaseResponse;
 
 class PurchaseRequest extends AbstractRequest
 {
-    protected $endpoint = 'https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry';
+    protected $endpoint = 'https://api-sandbox.duitku.com/api/merchant/createInvoice';
 
     public function getData()
     {
