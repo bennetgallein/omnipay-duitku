@@ -41,7 +41,7 @@ class PurchaseRequest extends AbstractRequest
             ], json_encode($data)
         );
         bdump($httpResponse);
-        bdump( $httpResponse->getBody());
+        bdump( $httpResponse->getBody()->getContents());
 
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
