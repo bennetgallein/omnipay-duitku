@@ -38,6 +38,7 @@ class PurchaseRequest extends AbstractRequest
                 'x-duitku-merchantcode' => $this->getParameter('merchantCode')
             ]
         ], json_encode($data));
+        bdump($httpResponse);
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
 
         return $this->response = new PurchaseResponse($this, $responseData);
