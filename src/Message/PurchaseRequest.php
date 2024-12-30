@@ -31,15 +31,24 @@ class PurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->request('POST', $this->endpoint, [
-            'headers' => [
-                'x-duitku-signature' => $data['signature'],
-                'x-duitku-timestamp' => $data['timestamp'],
-                'x-duitku-merchantcode' => $this->getMerchantCode(),
-                'Content-Type' => "application/json",
-                'Accept' => "application/json"
-            ]
-        ], json_encode($data));
+        try {
+
+            $httpResponse = $this->httpClient->request('POST', $this->endpoint, [
+                'headers' => [
+                    'x-duitku-signature' => $data['signature'],
+                    'x-duitku-timestamp' => $data['timestamp'],
+                    'x-duitku-merchantcode' => $this->getMerchantCode(),
+                    'Content-Type' => "application/json",
+                    'Accept' => "application/json"
+                    ]
+                ], json_encode($data));
+            } catch (ClientException $e) {
+                if ($e->getResponse()->getStatusCode() == 404) {
+                    $responseBody = $e->getResponse()->getBody()->getContents();
+                    // Process the 404 response body here
+                    echo "404 Error: " . $responseBody;
+                }
+            }
         bdump($httpResponse);
 
         $responseData = json_decode($httpResponse->getBody()->getContents(), true);
