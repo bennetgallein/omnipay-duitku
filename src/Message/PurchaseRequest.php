@@ -15,7 +15,7 @@ class PurchaseRequest extends AbstractRequest
 
         $data = [
             'merchantCode' => $this->getMerchantCode(),
-            'paymentAmount' => $this->getAmount(),
+            'paymentAmount' => (int) $this->getAmount(),
             'merchantOrderId' => $this->getTransactionId(),
             'productDetails' => $this->getDescription(),
             'email' => $this->getEmail(),
