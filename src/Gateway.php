@@ -16,7 +16,7 @@ class Gateway extends AbstractGateway
         return [
             'merchantCode' => '',
             'apiKey' => '',
-            'sandbox' => true,
+            'sandbox' => false,
         ];
     }
 
