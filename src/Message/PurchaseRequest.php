@@ -7,7 +7,7 @@ use Omnipay\Duitku\Message\AbstractRequest;
 
 class PurchaseRequest extends AbstractRequest
 {
-    protected $endpoint = 'https://api-sandbox.duitku.com/api/merchant/createInvoice';
+    protected $endpoint = '/api/merchant/createInvoice';
 
     public function getData()
     {
@@ -30,7 +30,7 @@ class PurchaseRequest extends AbstractRequest
     }
 
     public function sendData($data) {
-        $httpResponse = $this->httpClient->request('POST', $this->endpoint, [
+        $httpResponse = $this->httpClient->request('POST', $this->getBaseUrl() . $this->endpoint, [
                 'x-duitku-signature' => $data['signature'],
                 'x-duitku-timestamp' => $data['timestamp'],
                 'x-duitku-merchantcode' => $this->getMerchantCode(),

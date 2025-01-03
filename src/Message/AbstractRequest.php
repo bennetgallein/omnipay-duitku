@@ -3,6 +3,10 @@ namespace Omnipay\Duitku\Message;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest {
  
+  public function getBaseUrl() {
+    return $this->getParameter('sandbox') ? 'https://api-sandbox.duitku.com' : 'https://api-prod.duitku.com';
+  }
+
   public function getApiKey() {
       return $this->getParameter('apiKey');
   }
